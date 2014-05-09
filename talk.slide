@@ -1,0 +1,42 @@
+Managing EC2 servers with Ansible
+20 May, 2014
+
+Lorin Hochstein
+Lead Software Engineer, SendGrid
+lorin.hochstein@sendgrid.com
+@lhochstein
+
+#
+# Managing EC2 servers by hand is a pain
+#
+* 
+
+.image ssh.png
+
+# - Random example: you need to do a security update because there’s a
+#   bug in an SSL library
+# - You don’t want to ssh to individual machines for maintenance
+#     - If you have more than one server, you’ll likely make them
+#       inconsistent
+#     - It doesn’t scale
+#     - It’s not a good use of your time
+#     * Lots of automation tools out there to eliminate this pain
+
+# - Our roadmap
+#     - Today I’m talking about one such tool, Ansible
+#     - Also makes life simpler if you use the same tool for deployment
+#       as for server management
+#           Maybe zap this from here
+#     - Focus today is on using Ansible with EC2
+
+* 
+
+#
+# Ansible basic explanation
+#
+
+
+    $ ssh myserver
+    $ sudo apt-get update
+    $ sudo apt-get dist-upgrade
+
