@@ -1,0 +1,8 @@
+- name: Upgrade web servers
+  hosts: webservers
+  user: ubuntu
+  sudo: yes
+  tasks:
+    - name: Update apt cache and do dist-upgrade
+      apt: update_cache=yes upgrade=dist
+

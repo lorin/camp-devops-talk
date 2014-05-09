@@ -6,12 +6,12 @@ Lead Software Engineer, SendGrid
 lorin.hochstein@sendgrid.com
 @lhochstein
 
+* 
+
 #
 # Managing EC2 servers by hand is a pain
 #
-* 
 
-.image ssh.png
 
 # - Random example: you need to do a security update because there’s a
 #   bug in an SSL library
@@ -29,14 +29,24 @@ lorin.hochstein@sendgrid.com
 #           Maybe zap this from here
 #     - Focus today is on using Ansible with EC2
 
+.image ssh.png
+
 * 
 
 #
 # Ansible basic explanation
 #
 
+# Say you had to do a security update on Ubuntu
 
     $ ssh myserver
     $ sudo apt-get update
     $ sudo apt-get dist-upgrade
 
+
+
+* 
+
+# Here's how you would do it in ansible
+
+.code security-update.yml
