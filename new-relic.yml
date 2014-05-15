@@ -1,0 +1,22 @@
+- name: Configure server to monitor with New Relic
+
+  hosts: staging
+  user: ubuntu
+  sudo: yes
+
+  tasks:
+
+    - name: add New Relic apt repository
+      apt_repository: repo="deb http://apt.newrelic.com/debian/ newrelic non-free"
+
+    - name: Add GPG key
+      apt_key: url=https://download.newrelic.com/548C16BF.gpg
+
+    - name: Install newrelic package
+      apt: name=newrelic-sysmond update_cache=yes
+
+    - name: Add license key
+      command: /usr/sbin/nrsysmond-config --set license_key={{ license_key }}
+
+    - name: Start daemon
+      service: name=newrelic-sysmond state=started
