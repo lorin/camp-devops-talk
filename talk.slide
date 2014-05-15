@@ -102,12 +102,7 @@ lorin.hochstein@sendgrid.com
 
 Inventory file:
 
-    mail.example.com
-    foo.example.com
-    bar.example.com
-    one.example.com
-    two.example.com
-    three.example.com
+.code inventory-simple
 
 Playbook:
 
@@ -120,22 +115,28 @@ Playbook:
 
 # We can also define groups
 
-    mail.example.com
+Inventory file:
 
-    [webservers]
-    foo.example.com
-    bar.example.com
+.code inventory-with-groups
 
-    [dbservers]
-    one.example.com
-    two.example.com
-    three.example.com
+Playbook:
 
+    - name: My playbook
+      hosts: webservers
+      tasks:
+        ...
 
 * 
 
 # We can even define groups of groups
 
-mail.example.com
+Inventory file:
 
-[appservers:children]
+.code inventory-groups-of-groups
+
+Playbook:
+
+    - name: My playbook
+      hosts: appservers
+      tasks:
+        ...
