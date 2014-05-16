@@ -295,28 +295,25 @@ Playbook:
     "ec2-160-219-218-205.compute-1.amazonaws.com"
   ],
 
-* 
-
-    env=production
-    Name=MyApplication::Webserver
-
 
 * 
 
-.image ec2-tags.png
+.image ec2-tags.png 622 1075
 
 * 
 
   $ ./ec2.py
   ...
-  "tag_Name_MyApplication__Webserver": [
-    "ec2-233-138-96-209.compute-1.amazonaws.com"
+  "tag_Name_camp_devops": [
+    "ec2-54-186-152-191.us-west-2.compute.amazonaws.com"
   ],
-  "tag_env_production": [
-    "ec2-173-107-203-37.compute-1.amazonaws.com",
-    "ec2-76-250-206-36.compute-1.amazonaws.com",
-    "ec2-100-147-249-59.compute-1.amazonaws.com",
-    "ec2-121-135-20-121.compute-1.amazonaws.com",
+  "tag_env_testing": [
+    "ec2-54-186-152-191.us-west-2.compute.amazonaws.com",
+    "ec2-173-107-203-37.compute-1.amazonaws.com"
+  ],
+  "tag_role_queue": [
+    "ec2-54-186-152-191.us-west-2.compute.amazonaws.com",
+    "ec2-187-184-160-248.compute-1.amazonaws.com"
   ]
 
 
@@ -324,27 +321,93 @@ Playbook:
 
 * 
 
+    - name: Do something to the production servers
+      hosts: tag_env_production
+      tasks:
+        - ...
+
+
+* 
+
+    - name: Do something to the production servers
+      hosts: production
+      tasks:
+        - ...
+
+
+* 
+
 Static inventory file:
 
-    [tag_env_production]
+    [testing:children]
+    tag_env_testing
+* 
 
-    [production:children]
-    tag_env_production
+Static inventory file:
 
+    [testing:children]
+    tag_env_testing
+
+    [tag_env_testing]
 
 Playbook:
 
-    - name: Deploy web app to production
-      hosts: production
+    - name: Deploy web app to testing servers
+      hosts: testing
       tasks:
         ...
 
 
+ * 
 
-
-
-# To make life easier
-
+    ./ec2.py --host ec2-37-182-254-23.compute-1.amazonaws.com
+    {
+      "ec2__in_monitoring_element": false,
+      "ec2_ami_launch_index": "0",
+      "ec2_architecture": "x86_64",
+      "ec2_client_token": "",
+      "ec2_dns_name": "ec2-37-182-254-23.compute-1.amazonaws.com"
+      "ec2_ebs_optimized": false,
+      "ec2_eventsSet": "",
+      "ec2_group_name": "",
+      "ec2_hypervisor": "xen",
+      "ec2_id": "i-7f122g7f",
+      "ec2_image_id": "ami-83dee0ea",
+      "ec2_instance_profile": "",
+      "ec2_instance_type": "t1.micro",
+      "ec2_ip_address": "37.182.254.23",
+      "ec2_item": "",
+      "ec2_kernel": "aki-88aa75e1",
+      "ec2_key_name": "lorin",
+      "ec2_launch_time": "2014-02-03T03:59:30.000Z",
+      "ec2_monitored": false,
+      "ec2_monitoring": "",
+      "ec2_monitoring_state": "disabled",
+      "ec2_persistent": false,
+      "ec2_placement": "us-east-1c",
+      "ec2_platform": "",
+      "ec2_previous_state": "",
+      "ec2_previous_state_code": 0,
+      "ec2_private_dns_name": "ip-10-223-227-122.ec2.internal",
+      "ec2_private_ip_address": "10.223.227.122",
+      "ec2_public_dns_name": "ec2-37-182-254-23.compute-1.amazonaws.com",
+      "ec2_ramdisk": "",
+      "ec2_reason": "",
+      "ec2_region": "us-east-1",
+      "ec2_requester_id": "",
+      "ec2_root_device_name": "/dev/sda1",
+      "ec2_root_device_type": "ebs",
+      "ec2_security_group_ids": "sg-b16b39da,sg-8f6b69f4,sg-826b69ea",
+      "ec2_security_group_names": "web,ping,ssh",
+      "ec2_spot_instance_request_id": "",
+      "ec2_state": "running",
+      "ec2_state_code": 16,
+      "ec2_state_reason": "",
+      "ec2_subnet_id": "",
+      "ec2_tag_Name": "camp-devops-example",
+      "ec2_virtualization_type": "paravirtual",
+      "ec2_vpc_id": ""
+    }
 
 * Facts about individual instances
 
