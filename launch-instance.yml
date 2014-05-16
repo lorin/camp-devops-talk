@@ -1,0 +1,18 @@
+- name: Launch EC2 instances and install nginx
+  hosts: localhost
+  tasks:
+
+  - local_action:
+      module: ec2
+      key_name: mykey
+      instance_type: c1.medium
+      region: us-east-1
+      image: ami-40603ad1
+      wait: yes
+      group: ['ping', 'web', 'ssh']
+      instance_tags:
+        Name: Staging::Webserver
+        role: web
+        env: staging
+
+

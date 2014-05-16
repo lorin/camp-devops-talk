@@ -352,6 +352,15 @@ Static inventory file:
   $ ansible-playbook deploy-web-to-production.yml
   ERROR: child group is not defined: (tag_env_production)
 
+
+* 
+
+Static inventory file:
+
+    [production:children]
+    tag_env_production
+
+    [tag_env_production]
 * 
 
 Static inventory file:
@@ -365,9 +374,9 @@ Playbook:
 
 
   $ ansible-playbook deploy-web-to-production.yml
+  PLAY [Deploy web to production] ******************************************
 
-
- * 
+* 
 
     ./ec2.py --host ec2-37-182-254-23.compute-1.amazonaws.com
     {
@@ -418,10 +427,13 @@ Playbook:
       "ec2_vpc_id": ""
     }
 
-* Facts about individual instances
+* 
 
-* Using the EC2 module for starting instances
+.code launch-instance.yml
 
+* 
+
+.code launch-instance-with-ami.yml
 
 * How do I speed up management inside EC2?
 

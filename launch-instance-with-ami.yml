@@ -1,0 +1,25 @@
+
+- name: Launch EC2 instance and install nginx
+  hosts: localhost
+  vars:
+    region: us-west-1
+
+  tasks:
+  - name: Get the Ubuntu trusty AMI
+    ec2_ami_search: distro=ubuntu release=trusty region={{ region }}
+    register: ubuntu_image
+
+  - name: Start the EC2 instance
+  - local_action:
+      module: ec2
+      key_name: mykey
+      instance_type: c1.medium
+      region: "{{ region }}"
+      image: "{{ ubuntu_image.ami }}"
+      group: ['ping', 'web', 'ssh']
+      instance_tags:
+        Name: Staging::Webserver
+        role: web
+        env: staging
+
+
