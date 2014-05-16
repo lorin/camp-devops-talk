@@ -339,23 +339,32 @@ Playbook:
 
 Static inventory file:
 
-    [testing:children]
-    tag_env_testing
+    [production:children]
+    tag_env_production
 * 
 
 Static inventory file:
 
-    [testing:children]
-    tag_env_testing
+    [production:children]
+    tag_env_production
 
-    [tag_env_testing]
+
+  $ ansible-playbook deploy-web-to-production.yml
+  ERROR: child group is not defined: (tag_env_production)
+
+* 
+
+Static inventory file:
+
+    [production:children]
+    tag_env_production
+
+    [tag_env_production]
 
 Playbook:
 
-    - name: Deploy web app to testing servers
-      hosts: testing
-      tasks:
-        ...
+
+  $ ansible-playbook deploy-web-to-production.yml
 
 
  * 
