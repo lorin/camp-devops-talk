@@ -140,3 +140,52 @@ Playbook:
       hosts: appservers
       tasks:
         ...
+
+# This isn't a good way to deal with EC2 instances
+
+* 
+
+# If an inventory file is executable, ansible will
+# run it instead of examining it
+
+
+    chmod +x ./my-inventory-file
+
+* 
+
+    $ ./my-inventory-file --list
+
+    {
+      ...,
+      "webservers": [
+        "foo.example.com",
+        "bar.example.com"
+     ],
+      "dbservers" : [
+        "one.example.com",
+        "two.example.com",
+        "three.example.com"
+     ],
+    ...
+    }
+
+# The script has to respond to a --list to list all host and groups
+
+* 
+
+    $ ./ec2.py
+
+
+* Using the EC2 module for starting instances
+
+
+* How do I speed up management inside EC2?
+
+Don’t try to manage a fleet of EC2 machines from your laptop.
+Connect to a management node inside EC2 first and run Ansible from there.
+
+.link http://docs.ansible.com/faq.html#how-do-i-speed-up-management-inside-ec2
+
+
+
+* Packer for AMIs
