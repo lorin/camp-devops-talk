@@ -300,6 +300,13 @@ Playbook:
     env=production
     Name=MyApplication::Webserver
 
+
+* 
+
+.image ec2-tags.png
+
+* 
+
   $ ./ec2.py
   ...
   "tag_Name_MyApplication__Webserver": [
