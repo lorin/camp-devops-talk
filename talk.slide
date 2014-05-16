@@ -72,8 +72,29 @@ lorin.hochstein@sendgrid.com
 
 
     $ ansible-playbook security-update.yml
-    <TODO: show output here>
+    PLAY [Upgrade web servers] ****************************************************
 
+    GATHERING FACTS ***************************************************************
+    ok: [web1.example.com]
+    ok: [web2.example.com]
+    ok: [web3.example.com]
+
+    TASK: [Update apt cache and do dist-upgrade] **********************************
+    ok: [web1.example.com]
+    ok: [web2.example.com]
+    ok: [web3.example.com]
+
+    PLAY RECAP ********************************************************************
+    web1.example.com               : ok=2    changed=0    unreachable=0    failed=0
+    web2.example.com               : ok=2    changed=0    unreachable=0    failed=0
+    web3.example.com               : ok=2    changed=0    unreachable=0    failed=0
+
+
+* 
+
+# Getting a little fancier, we can check if need a reboot 
+
+.code security-update-with-reboot.yml
 
 * 
 # - Here’s a more complex example: Installing New Relic server monitoring
@@ -219,6 +240,7 @@ Playbook:
     "ec2-75-220-111-180.compute-1.amazonaws.com",
     "ec2-189-19-204-147.compute-1.amazonaws.com",
     "ec2-165-131-196-230.compute-1.amazonaws.com",
+  ...
 
 * 
 
@@ -248,6 +270,73 @@ Playbook:
       "ec2-160-220-184-229.compute-1.amazonaws.com"
     ],
     ...
+
+
+* 
+
+  $ ./ec2.py
+  ...
+  "type_c1_medium": [
+    "ec2-48-31-233-7.compute-1.amazonaws.com",
+    "ec2-94-113-221-190.compute-1.amazonaws.com",
+    "ec2-236-52-85-49.compute-1.amazonaws.com",
+    "ec2-47-42-200-135.eu-west-1.compute.amazonaws.com"
+  ],
+  "type_c3_large": [
+    "ec2-135-139-226-29.compute-1.amazonaws.com",
+    "ec2-111-147-136-144.compute-1.amazonaws.com",
+    "ec2-193-158-131-247.us-west-2.compute.amazonaws.com",
+    "ec2-242-243-218-101.eu-west-1.compute.amazonaws.com"
+  ],
+  "type_t1_micro": [
+    "ec2-172-90-237-244.compute-1.amazonaws.com",
+    "ec2-187-184-160-248.compute-1.amazonaws.com",
+    "ec2-229-65-104-88.compute-1.amazonaws.com",
+    "ec2-160-219-218-205.compute-1.amazonaws.com"
+  ],
+
+* 
+
+    env=production
+    Name=MyApplication::Webserver
+
+  $ ./ec2.py
+  ...
+  "tag_Name_MyApplication__Webserver": [
+    "ec2-233-138-96-209.compute-1.amazonaws.com"
+  ],
+  "tag_env_production": [
+    "ec2-173-107-203-37.compute-1.amazonaws.com",
+    "ec2-76-250-206-36.compute-1.amazonaws.com",
+    "ec2-100-147-249-59.compute-1.amazonaws.com",
+    "ec2-121-135-20-121.compute-1.amazonaws.com",
+  ]
+
+
+# Most interesting is that you can do it by EC2 tags
+
+* 
+
+Static inventory file:
+
+    [tag_env_production]
+
+    [production:children]
+    tag_env_production
+
+
+Playbook:
+
+    - name: Deploy web app to production
+      hosts: production
+      tasks:
+        ...
+
+
+
+
+
+# To make life easier
 
 
 * Facts about individual instances
