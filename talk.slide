@@ -378,7 +378,7 @@ Playbook:
 
 * 
 
-    ./ec2.py --host ec2-37-182-254-23.compute-1.amazonaws.com
+    $ ./ec2.py --host ec2-37-182-254-23.compute-1.amazonaws.com
     {
       "ec2__in_monitoring_element": false,
       "ec2_ami_launch_index": "0",
@@ -447,8 +447,7 @@ Connect to a management node inside EC2 first and run Ansible from there.
 
 .link http://docs.ansible.com/faq.html#how-do-i-speed-up-management-inside-ec2
 
-* Building AMIs
-
+* Building AMIs with Packer
 
 * 
 
@@ -488,3 +487,9 @@ Connect to a management node inside EC2 first and run Ansible from there.
         "changed": true,
         "msg": "AMI deregister/delete operation complete"
     }
+
+
+* Slides are on Github
+
+.link https://github.com/lorin/camp-devops-talk
+.link http://go-talks.appspot.com/github.com/lorin/camp-devops-talk/talk.slide
