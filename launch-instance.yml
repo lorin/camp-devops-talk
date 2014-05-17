@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
 
-  - local_action:
+  - action:
       module: ec2
       key_name: mykey
       instance_type: c1.medium

@@ -22,7 +22,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": "sudo apt-get install ansible"
+      "inline": ["sudo apt-get update", "sudo apt-get install -y ansible"]
     },
     {
       "type": "ansible-local",
