@@ -17,6 +17,7 @@
       region: "{{ region }}"
       image: "{{ ubuntu_image.ami }}"
       group: ['ping', 'web', 'ssh']
+      wait: yes
       instance_tags:
         Name: Staging::Webserver
         role: web

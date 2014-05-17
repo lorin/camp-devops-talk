@@ -435,7 +435,7 @@ Playbook:
       hosts: localhost
       tasks:
        - name: Start the instance
-         ec2: image=ami-018c9568 instance_type=m3.medium key_name=mykey region=us-east-1
+         ec2: image=ami-018c9568 instance_type=m3.medium key_name=mykey region=us-east-1 wait=yes
          register: ec2
        - name: Output info about the instance
          debug: var=ec2
@@ -460,7 +460,7 @@ Playbook:
                 {
                     "ami_launch_index": "0",
                     "architecture": "x86_64",
-                    "dns_name": "",
+                    "dns_name": "ec2-54-80-213-53.compute-1.amazonaws.com",
                     "ebs_optimized": false,
                     "hypervisor": "xen",
                     "id": "i-f90e81a9",
@@ -470,10 +470,10 @@ Playbook:
                     "key_name": "mykey",
                     "launch_time": "2014-05-17T02:07:49.000Z",
                     "placement": "us-east-1c",
-                    "private_dns_name": "",
-                    "private_ip": null,
-                    "public_dns_name": "",
-                    "public_ip": null,
+                    "private_dns_name": "ip-10-79-132-179.ec2.internal",
+                    "private_ip": "10.79.132.179",
+                    "public_dns_name": "ec2-54-80-213-53.compute-1.amazonaws.com",
+                    "public_ip": "54.80.213.53",
                     "ramdisk": null,
                     "region": "us-east-1",
                     "root_device_name": "/dev/sda1",

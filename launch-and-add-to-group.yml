@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: Start the instance
-      ec2: image=ami-018c9568 instance_type=m3.medium key_name=mykey region=us-east-1
+      ec2: image=ami-018c9568 instance_type=m3.medium key_name=mykey region=us-east-1 wait=yes
       register: ec2
 
     - name: Add new instance to host group
