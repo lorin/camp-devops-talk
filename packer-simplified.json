@@ -1,0 +1,24 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "<ec2 access key goes here>",
+      "secret_key": "<ec2 secret key goes here",
+      "region": "us-east-1",
+      "source_ami": "ami-018c9568",
+      "instance_type": "t1.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "my-ami-name",
+      "tags": {
+        "Name": "Web server",
+        "role": "web"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible-local",
+      "playbook_file": "web.yml"
+    }
+  ]
+}

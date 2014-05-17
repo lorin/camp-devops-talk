@@ -1,4 +1,5 @@
 - hosts: localhost
+  sudo: true
   tasks:
     - apt: name=nginx
 

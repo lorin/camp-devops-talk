@@ -21,6 +21,10 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "inline": "sudo apt-get install ansible"
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "web.yml"
     }

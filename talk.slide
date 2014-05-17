@@ -427,6 +427,8 @@ Playbook:
       "ec2_vpc_id": ""
     }
 
+* Creating new instances
+
 * 
 
 .code launch-instance.yml
@@ -442,8 +444,27 @@ Connect to a management node inside EC2 first and run Ansible from there.
 
 .link http://docs.ansible.com/faq.html#how-do-i-speed-up-management-inside-ec2
 
+* Building AMIs
 
 
 * 
 
 .code packer.json
+
+* 
+
+    $ packer build web-ami.json
+
+    ==> amazon-ebs: Creating temporary keypair: packer 5376b96a-f3bd-68d7-12cf-1b45e7feb653
+    ==> amazon-ebs: Creating temporary security group for this instance...
+    ==> amazon-ebs: Authorizing SSH access on the temporary security group...
+    ==> amazon-ebs: Launching a source AWS instance...
+        amazon-ebs: Instance ID: i-69913e3a
+    ==> amazon-ebs: Waiting for instance (i-69913e3a) to become ready...
+    ==> amazon-ebs: Waiting for SSH to become available...
+    ==> amazon-ebs: Connected to SSH!
+    ==> amazon-ebs: Provisioning with Ansible...
+        amazon-ebs: Creating Ansible staging directory...
+        amazon-ebs: Creating directory: /tmp/packer-provisioner-ansible-local
+        amazon-ebs: Uploading main Playbook file...
+
