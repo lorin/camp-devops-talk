@@ -1,0 +1,28 @@
+{
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-1",
+      "source_ami": "ami-018c9568",
+      "instance_type": "t1.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "my-ami-name",
+      "tags": {
+        "Name": "Web server",
+        "role": "web"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible-local",
+      "playbook_file": "web.yml"
+    }
+  ]
+}

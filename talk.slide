@@ -444,4 +444,6 @@ Connect to a management node inside EC2 first and run Ansible from there.
 
 
 
-* Packer for AMIs
+* 
+
+.code packer.json
