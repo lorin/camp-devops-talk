@@ -1,4 +1,4 @@
-- name: Launch EC2 instances and install nginx
+- name: Launch EC2 instances
   hosts: localhost
   tasks:
 
@@ -8,6 +8,7 @@
       instance_type: c1.medium
       region: us-east-1
       image: ami-40603ad1
+      count: 3
       wait: yes
       group: ['ping', 'web', 'ssh']
       instance_tags:
@@ -15,4 +16,5 @@
         role: web
         env: staging
 
-
+   - name: Output info about the instance
+     debug: var=ec2

@@ -10,7 +10,7 @@
     register: ubuntu_image
 
   - name: Start the EC2 instance
-  - local_action:
+  - action:
       module: ec2
       key_name: mykey
       instance_type: c1.medium
@@ -22,4 +22,5 @@
         role: web
         env: staging
 
-
+   - name: Output info about the instance
+     debug: var=ec2

@@ -111,7 +111,7 @@ lorin.hochstein@sendgrid.com
 # Here's something you run into pretty quickly
 # Ansible needs to know where your hosts are
 
-    $ ansible-playbook new-relic.yml
+    $ ansible-playbook new-relic.yml -e license_key=abc123
 
     PLAY [Configure server to monitor with New Relic] ***************************** 
     skipping: no hosts matched
@@ -431,14 +431,80 @@ Playbook:
 
 * 
 
+    - name: start an EC2 instance
+      hosts: localhost
+      tasks:
+       - name: Start the instance
+         ec2: image=ami-018c9568 instance_type=m3.medium key_name=mykey region=us-east-1
+         register: ec2
+       - name: Output info about the instance
+         debug: var=ec2
 
 * 
 
-.code launch-instance.yml
+    $ ansible-playbook start-instance.yml
+
+    PLAY [start an EC2 instance] **************************************************
+
+    TASK: [Start the instance] ****************************************************
+    changed: [localhost]
+
+    TASK: [Output info about the instance] ****************************************
+    ok: [localhost] => {
+        "ec2": {
+            "changed": true,
+            "instance_ids": [
+                "i-f90e81a9"
+            ],
+            "instances": [
+                {
+                    "ami_launch_index": "0",
+                    "architecture": "x86_64",
+                    "dns_name": "",
+                    "ebs_optimized": false,
+                    "hypervisor": "xen",
+                    "id": "i-f90e81a9",
+                    "image_id": "ami-018c9568",
+                    "instance_type": "m3.medium",
+                    "kernel": "aki-919dcaf8",
+                    "key_name": "mykey",
+                    "launch_time": "2014-05-17T02:07:49.000Z",
+                    "placement": "us-east-1c",
+                    "private_dns_name": "",
+                    "private_ip": null,
+                    "public_dns_name": "",
+                    "public_ip": null,
+                    "ramdisk": null,
+                    "region": "us-east-1",
+                    "root_device_name": "/dev/sda1",
+                    "root_device_type": "ebs",
+                    "state": "pending",
+                    "state_code": 0,
+                    "virtualization_type": "paravirtual"
+                }
+            ],
+            "invocation": {
+                "module_args": "image=ami-018c9568 instance_type=m3.medium key_name=mykey",
+                "module_name": "ec2"
+            },
+            "tagged_instances": []
+        }
+    }
+
+    PLAY RECAP ********************************************************************
+    localhost                  : ok=2    changed=1    unreachable=0    failed=0
 
 * 
 
 .code launch-instance-with-ami.yml
+
+* 
+
+.code launch-and-add-to-group.yml
+
+* 
+
+.code launch-with-tags.yml
 
 * How do I speed up management inside EC2?
 
