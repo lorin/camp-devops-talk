@@ -431,6 +431,9 @@ Playbook:
 
 * 
 
+
+* 
+
 .code launch-instance.yml
 
 * 
@@ -463,8 +466,51 @@ Connect to a management node inside EC2 first and run Ansible from there.
     ==> amazon-ebs: Waiting for instance (i-69913e3a) to become ready...
     ==> amazon-ebs: Waiting for SSH to become available...
     ==> amazon-ebs: Connected to SSH!
+    ==> amazon-ebs: Provisioning with shell script: /var/folders/lc/k_jx2vhx1dj8rdl3hzlsbd1m0000gp/T/packer-shell979032617
+        amazon-ebs: Ign http://us-east-1.ec2.archive.ubuntu.com trusty InRelease
+        ...
+
     ==> amazon-ebs: Provisioning with Ansible...
         amazon-ebs: Creating Ansible staging directory...
         amazon-ebs: Creating directory: /tmp/packer-provisioner-ansible-local
         amazon-ebs: Uploading main Playbook file...
+        amazon-ebs: Creating Ansible staging directory...
+        amazon-ebs: Creating directory: /tmp/packer-provisioner-ansible-local
+        amazon-ebs: Uploading main Playbook file...
+        amazon-ebs: Executing Ansible: cd /tmp/packer-provisioner-ansible-local && ansible-playbook /tmp/packer-provisioner-ansible-local/web.yml -c local -i "127.0.0.1,"
+        amazon-ebs:
+        amazon-ebs: PLAY [localhost] **************************************************************
+        amazon-ebs:
+        amazon-ebs: GATHERING FACTS ***************************************************************
+        amazon-ebs: ok: [localhost]
+        amazon-ebs:
+        amazon-ebs: TASK: [apt name=nginx] ********************************************************
+        amazon-ebs: changed: [localhost]
+        amazon-ebs:
+        amazon-ebs: PLAY RECAP ********************************************************************
+        amazon-ebs: localhost                  : ok=2    changed=1    unreachable=0    failed=0
+        amazon-ebs:
+        amazon-ebs:
+        amazon-ebs:
+        amazon-ebs:
+    ==> amazon-ebs: Stopping the source instance...
+    ==> amazon-ebs: Waiting for the instance to stop...
+    ==> amazon-ebs: Creating the AMI: my-ami-name
+        amazon-ebs: AMI: ami-ae806ec6
+    ==> amazon-ebs: Waiting for AMI to become ready...
+    ==> amazon-ebs: Adding tags to AMI (ami-ae806ec6)...
+        amazon-ebs: Adding tag: "Name": "Web server"
+        amazon-ebs: Adding tag: "role": "web"
+    ==> amazon-ebs: Terminating the source AWS instance...
+    ==> amazon-ebs: Deleting temporary security group...
+    ==> amazon-ebs: Deleting temporary keypair...
+    Build 'amazon-ebs' finished.
 
+    ==> Builds finished. The artifacts of successful builds are:
+    --> amazon-ebs: AMIs were created:
+
+    us-east-1: ami-ae806ec6
+
+* 
+
+    $ ansible localhost -m ec2_ami -a "image_id=... state=absent delete_snaphost=yes"
