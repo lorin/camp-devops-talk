@@ -16,7 +16,7 @@
       apt: name=newrelic-sysmond update_cache=yes
 
     - name: Add license key
-      command: /usr/sbin/nrsysmond-config --set license_key={{ license_key }}
+      command: /usr/sbin/nrsysmond-config --set license_key=f99f9fbc2ad64cf5ac4c1b45004d00dd
 
     - name: Start daemon
       service: name=newrelic-sysmond state=started
