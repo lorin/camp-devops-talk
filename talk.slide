@@ -2,9 +2,14 @@ Managing EC2 servers with Ansible
 20 May, 2014
 
 Lorin Hochstein
-Lead Software Engineer, SendGrid
+Lead Software Engineer, SendGrid Labs
 lorin.hochstein@sendgrid.com
 @lhochstein
+
+* "Try our free server monitoring!"
+
+
+.image NewRelic-logo-square-RGBHEX.png 416 512
 
 * 
 
@@ -25,21 +30,6 @@ lorin.hochstein@sendgrid.com
     skipping: no hosts matched
 
     PLAY RECAP ******************************************************************** 
-
-* 
-
-# The simplest inventory file
-
-Inventory file:
-
-.code inventory-simple
-
-Playbook:
-
-    - name: My playbook
-      hosts: mail.example.com
-      tasks:
-        ...
 
 * 
 
@@ -336,7 +326,7 @@ Playbook:
     }
 
 
-* Building AMIs with Packer
+* Build AMIs with Packer
 
 * 
 

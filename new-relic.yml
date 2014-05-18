@@ -1,6 +1,7 @@
 - name: Configure server to monitor with New Relic
 
   hosts: staging
+
   user: ubuntu
   sudo: yes
 
