@@ -506,13 +506,6 @@ Playbook:
 
 .code launch-with-tags.yml
 
-* How do I speed up management inside EC2?
-
-Don’t try to manage a fleet of EC2 machines from your laptop.
-Connect to a management node inside EC2 first and run Ansible from there.
-
-.link http://docs.ansible.com/faq.html#how-do-i-speed-up-management-inside-ec2
-
 * Building AMIs with Packer
 
 * 
