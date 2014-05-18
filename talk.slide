@@ -554,6 +554,13 @@ Connect to a management node inside EC2 first and run Ansible from there.
         "msg": "AMI deregister/delete operation complete"
     }
 
+* Takeaways
+
+- Use ec2.py dynamic inventory
+- Use EC2 tags to define groups
+- Specify better group names in static inventory file
+- Use Packer for creating AMIs with Ansible
+
 
 * Slides are on Github
 
