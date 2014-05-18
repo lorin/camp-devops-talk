@@ -377,26 +377,27 @@ Playbook:
         "msg": "AMI deregister/delete operation complete"
     }
 
-* Ansible contains many EC2-related modules
+* Ansible ships with many EC2 modules
 
 - ec2 - create, terminate, stop or start instances
 - ec2_ami - create or destroy images
-- ec2_tags - create or remove tags
-- ec2_facts - gathers facts about remote hosts within ec2
-- ec2_ami_search -  Retrieve AWS AMI for a given operating system
+# - ec2_tags - create or remove tags
+#- ec2_facts - gathers facts about remote hosts within ec2
+# - ec2_ami_search -  Retrieve AWS AMI for a given operating system
 - ec2_eip - associate an EC2 elastic IP with an instance
-- ec2_elb - De-registers or registers instances from EC2 ELBs
-- ec2_lc - Create or delete AWS Autoscaling Launch Configurations
-- ec2_asg - Create or delete AWS Autoscaling Groups
-- ec2_key - maintain an ec2 key pair
-- ec2_vol - create and attach a volume, return volume id and device map
 - ec2_vpc - configure AWS virtual private clouds
-- ec2_group - maintain an ec2 VPC security group.
-- ec2_elb_lb - Creates or destroys Amazon ELB
+# - ec2_lc - Create or delete AWS Autoscaling Launch Configurations
+# - ec2_key - maintain an ec2 key pair
+- ec2_vol - create and attach a volume, return volume id and device map
+# - ec2_group - maintain an ec2 VPC security group.
+# - ec2_elb_lb - Creates or destroys Amazon ELB
 - ec2_snapshot - creates a snapshot from an existing volume
-- ec2_metric_alarm - Create/update or delete AWS Cloudwatch ‘metric alarms’
-- ec2_scaling_policy - Create or delete AWS scaling policies for Autoscaling groups
-
+# - ec2_metric_alarm - Create/update or delete AWS Cloudwatch ‘metric alarms’
+# - ec2_scaling_policy - Create or delete AWS scaling policies for Autoscaling groups
+- ec2_vpc - configure AWS virtual private clouds
+- ec2_asg - Create or delete AWS Autoscaling Groups
+- ec2_elb - De-registers or registers instances from EC2 ELBs
+- route53 - add or delete entries in Amazons Route53 DNS service
 
 
 * Takeaways
