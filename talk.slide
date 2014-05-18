@@ -12,102 +12,6 @@ lorin.hochstein@sendgrid.com
 
 * 
 
-
-#
-# Managing EC2 servers by hand is a pain
-#
-
-
-# - Random example: you need to do a security update because there’s a
-#   bug in an SSL library
-# - You don’t want to ssh to individual machines for maintenance
-#     - If you have more than one server, you’ll likely make them
-#       inconsistent
-#     - It doesn’t scale
-#     - It’s not a good use of your time
-#     * Lots of automation tools out there to eliminate this pain
-
-# - Our roadmap
-#     - Today I’m talking about one such tool, Ansible
-#     - Also makes life simpler if you use the same tool for deployment
-#       as for server management
-#           Maybe zap this from here
-#     - Focus today is on using Ansible with EC2
-
-.image ssh.png
-
-* 
-
-#
-# Ansible basic explanation
-#
-
-# Say you had to do a security update on Ubuntu
-
-    $ ssh myserver
-    $ sudo apt-get update
-    $ sudo apt-get dist-upgrade
-
-
-* 
-# Here's how you would do it in ansible
-# You'd write a playbook
-
-.code security-update.yml
-
-* 
-
-# The magic comes from the apt module
-.image apt.png
-
-* 
-
-# - Then you’d run it
-# - What just happened?
-# - First, Ansible had to figure out which hosts it was going to interact
-#   with
-# - Then it ssh’d to each one, copied over some Python scripts, and ran
-#   them
-# - Each task ran in parallel across the machines
-# - But each task has to finish before it moves onto the next one
-# - We can get fancier and check for reboot
-# - We can also run them serially so we don’t reboot all our servers at
-#   once
-
-
-    $ ansible-playbook security-update.yml
-    PLAY [Upgrade web servers] ****************************************************
-
-    GATHERING FACTS ***************************************************************
-    ok: [web1.example.com]
-    ok: [web2.example.com]
-    ok: [web3.example.com]
-
-    TASK: [Update apt cache and do dist-upgrade] **********************************
-    ok: [web1.example.com]
-    ok: [web2.example.com]
-    ok: [web3.example.com]
-
-    PLAY RECAP ********************************************************************
-    web1.example.com               : ok=2    changed=0    unreachable=0    failed=0
-    web2.example.com               : ok=2    changed=0    unreachable=0    failed=0
-    web3.example.com               : ok=2    changed=0    unreachable=0    failed=0
-
-
-* 
-
-# Getting a little fancier, we can check if need a reboot 
-
-.code security-update-with-reboot.yml
-
-* 
-# - Here’s a more complex example: Installing New Relic server monitoring
-#   agent
-#
-# - We have multiple tasks, and we even have a variable.
-# - We can do more templating, conditions, but that's not what I'd like to talk
-# about today
-
 .code new-relic.yml
 
 * 
@@ -115,7 +19,7 @@ lorin.hochstein@sendgrid.com
 # Here's something you run into pretty quickly
 # Ansible needs to know where your hosts are
 
-    $ ansible-playbook new-relic.yml -e license_key=abc123
+    $ ansible-playbook new-relic.yml
 
     PLAY [Configure server to monitor with New Relic] ***************************** 
     skipping: no hosts matched
@@ -431,84 +335,6 @@ Playbook:
       "ec2_vpc_id": ""
     }
 
-* Creating new instances
-
-* 
-
-    - name: start an EC2 instance
-      hosts: localhost
-      tasks:
-       - name: Start the instance
-         ec2: image=ami-018c9568 instance_type=m3.medium key_name=mykey region=us-east-1 wait=yes
-         register: ec2
-       - name: Output info about the instance
-         debug: var=ec2
-
-* 
-
-    $ ansible-playbook start-instance.yml
-
-    PLAY [start an EC2 instance] **************************************************
-
-    TASK: [Start the instance] ****************************************************
-    changed: [localhost]
-
-    TASK: [Output info about the instance] ****************************************
-    ok: [localhost] => {
-        "ec2": {
-            "changed": true,
-            "instance_ids": [
-                "i-f90e81a9"
-            ],
-            "instances": [
-                {
-                    "ami_launch_index": "0",
-                    "architecture": "x86_64",
-                    "dns_name": "ec2-54-80-213-53.compute-1.amazonaws.com",
-                    "ebs_optimized": false,
-                    "hypervisor": "xen",
-                    "id": "i-f90e81a9",
-                    "image_id": "ami-018c9568",
-                    "instance_type": "m3.medium",
-                    "kernel": "aki-919dcaf8",
-                    "key_name": "mykey",
-                    "launch_time": "2014-05-17T02:07:49.000Z",
-                    "placement": "us-east-1c",
-                    "private_dns_name": "ip-10-79-132-179.ec2.internal",
-                    "private_ip": "10.79.132.179",
-                    "public_dns_name": "ec2-54-80-213-53.compute-1.amazonaws.com",
-                    "public_ip": "54.80.213.53",
-                    "ramdisk": null,
-                    "region": "us-east-1",
-                    "root_device_name": "/dev/sda1",
-                    "root_device_type": "ebs",
-                    "state": "pending",
-                    "state_code": 0,
-                    "virtualization_type": "paravirtual"
-                }
-            ],
-            "invocation": {
-                "module_args": "image=ami-018c9568 instance_type=m3.medium key_name=mykey",
-                "module_name": "ec2"
-            },
-            "tagged_instances": []
-        }
-    }
-
-    PLAY RECAP ********************************************************************
-    localhost                  : ok=2    changed=1    unreachable=0    failed=0
-
-* 
-
-.code launch-instance-with-ami.yml
-
-* 
-
-.code launch-and-add-to-group.yml
-
-* 
-
-.code launch-with-tags.yml
 
 * Building AMIs with Packer
 
