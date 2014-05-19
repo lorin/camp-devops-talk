@@ -193,6 +193,7 @@ Playbook:
     "ec2-160-219-218-205.compute-1.amazonaws.com"
   ],
 
+* Use EC2 tags
 
 * 
 
@@ -270,6 +271,12 @@ Static inventory file:
 
 Playbook:
 
+    - name: Do something to the production servers
+      hosts: production
+      tasks:
+        - ...
+
+Ansible is now happy:
 
   $ ansible-playbook deploy-web-to-production.yml
   PLAY [Deploy web to production] ******************************************
