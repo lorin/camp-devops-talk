@@ -71,6 +71,19 @@ Playbook:
         ...
 
 # This isn't a good way to deal with EC2 instances
+* 
+
+Inventory file:
+
+.code inventory-ec2-static
+
+Playbook:
+
+    - name: My playbook
+      hosts: appservers
+      tasks:
+        ...
+* Use dynamic inventory
 
 * 
 

@@ -1,0 +1,14 @@
+ec2-107-33-214-218.compute-1.amazonaws.com
+
+[webservers]
+ec2-104-236-90-9.compute-1.amazonaws.com
+ec2-43-73-7-13.compute-1.amazonaws.com
+
+[dbservers]
+ec2-75-220-111-180.compute-1.amazonaws.com
+ec2-251-154-39-73.compute-1.amazonaws.com
+ec2-253-205-226-239.compute-1.amazonaws.com
+
+[appservers:children]
+ec2-75-220-111-180.compute-1.amazonaws.com
+ec2-221-127-195-183.compute-1.amazonaws.com
