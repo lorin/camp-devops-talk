@@ -70,6 +70,7 @@ Playbook:
       tasks:
         ...
 
+
 # This isn't a good way to deal with EC2 instances
 * 
 
@@ -83,6 +84,9 @@ Playbook:
       hosts: appservers
       tasks:
         ...
+
+* NO!
+
 * Use dynamic inventory
 
 * 
@@ -110,6 +114,9 @@ Playbook:
      ],
     ...
     }
+
+
+* Batteries included: ec2.py
 
 # The script has to respond to a --list to list all host and groups
 
@@ -406,7 +413,7 @@ Ansible is now happy:
 
 * Takeaways
 
-- Use dynamic inventory script
+- Use dynamic inventory
 - Use EC2 tags to define Ansible host groups
 - Specify better group names by editing static inventory file
 - Use Packer for creating AMIs with Ansible
