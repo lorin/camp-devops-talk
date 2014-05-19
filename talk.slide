@@ -1,4 +1,4 @@
-Managing EC2 servers with Ansible
+Don't edit that inventory file! Managing EC2 with Ansible
 20 May, 2014
 
 Lorin Hochstein
@@ -20,6 +20,13 @@ _note:_not_affiliated_with_New_Relic_
 * 
 
 .code new-relic.yml
+
+* 
+
+# Here's something you run into pretty quickly
+# Ansible needs to know where your hosts are
+
+    $ ansible-playbook new-relic.yml
 
 * 
 
