@@ -79,11 +79,11 @@ _note:_not_affiliated_with_New_Relic_
 
 # We can also define groups
 
-Inventory file:
+Inventory file
 
 .code inventory-with-groups
 
-Playbook:
+Playbook
 
     - name: My playbook
       hosts: webservers
@@ -94,11 +94,11 @@ Playbook:
 
 # We can even define groups of groups
 
-Inventory file:
+Inventory file
 
 .code inventory-groups-of-groups
 
-Playbook:
+Playbook
 
     - name: My playbook
       hosts: appservers
@@ -109,11 +109,11 @@ Playbook:
 # This isn't a good way to deal with EC2 instances
 * 
 
-Inventory file:
+Inventory file
 
 .code inventory-ec2-static
 
-Playbook:
+Playbook
 
     - name: My playbook
       hosts: appservers
@@ -172,7 +172,7 @@ Playbook:
 
 * 
 
-Playbook:
+Playbook
 
     - name: My playbook
       hosts: i-3f4e42f6
@@ -180,7 +180,7 @@ Playbook:
         ...
 
 * 
-Ad-hoc command:
+Ad-hoc command
 
     $ ansible i-3f4e42f -m ping
 
@@ -319,18 +319,18 @@ Ad-hoc command:
 
 * 
 
-Static inventory file:
+Static inventory file
 
     [production:children]
     tag_env_production
 * 
 
-Static inventory file:
+Static inventory file
 
     [production:children]
     tag_env_production
 
-Playbook:
+Playbook
 
     - name: Do something to the production servers
       hosts: production
@@ -339,19 +339,19 @@ Playbook:
 
 * 
 
-Static inventory file:
+Static inventory file
 
     [production:children]
     tag_env_production
 
-Playbook:
+Playbook
 
     - name: Do something to the production servers
       hosts: production
       tasks:
         - ...
 
-Ansible doesn't like this:
+Ansible doesn't like this
 
   $ ansible-playbook deploy-web-to-production.yml
   ERROR: child group is not defined: (tag_env_production)
@@ -359,7 +359,7 @@ Ansible doesn't like this:
 
 * 
 
-Static inventory file:
+Static inventory file
 
     [production:children]
     tag_env_production
@@ -367,21 +367,21 @@ Static inventory file:
     [tag_env_production]
 * 
 
-Static inventory file:
+Static inventory file
 
     [production:children]
     tag_env_production
 
     [tag_env_production]
 
-Playbook:
+Playbook
 
     - name: Do something to the production servers
       hosts: production
       tasks:
         - ...
 
-Ansible is now happy:
+Ansible is now happy
 
   $ ansible-playbook deploy-web-to-production.yml
   PLAY [Deploy web to production] ******************************************
