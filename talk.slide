@@ -404,7 +404,7 @@ web.yml
         - name: add nginx package
           apt: name=nginx
         - name: ensure service is running
-          service: name=nginx stated
+          service: name=nginx started
 
 * 
 
