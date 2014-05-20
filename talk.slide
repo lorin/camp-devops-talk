@@ -1,4 +1,4 @@
-Hostnames suck, or managing EC2 with Ansible
+Hostnames suck, or managing EC2 servers with Ansible
 20 May, 2014
 
 Lorin Hochstein
@@ -27,6 +27,41 @@ _note:_not_affiliated_with_New_Relic_
 # Ansible needs to know where your hosts are
 
     $ ansible-playbook new-relic.yml
+
+* 
+
+    $ ansible-playbook new-relic.yml
+    PLAY [Configure server to monitor with New Relic] *****************************
+
+    TASK: [add New Relic apt repository] ******************************************
+    ok: [ec2-62-140-62-213.compute-1.amazonaws.com]
+    changed: [ec2-23-76-62-66.compute-1.amazonaws.com]
+    changed: [ec2-200-169-29-109.compute-1.amazonaws.com]
+
+    TASK: [Add GPG key] ***********************************************************
+    changed: [ec2-23-76-62-66.compute-1.amazonaws.com]
+    changed: [ec2-200-169-29-109.compute-1.amazonaws.com]
+    ok: [ec2-62-140-62-213.compute-1.amazonaws.com]
+
+    TASK: [Install newrelic package] **********************************************
+    changed: [ec2-23-76-62-66.compute-1.amazonaws.com]
+    changed: [ec2-200-169-29-109.compute-1.amazonaws.com]
+    ok: [ec2-62-140-62-213.compute-1.amazonaws.com]
+
+    TASK: [Add license key] *******************************************************
+    ok: [ec2-62-140-62-213.compute-1.amazonaws.com]
+    changed: [ec2-200-169-29-109.compute-1.amazonaws.com]
+    changed: [ec2-23-76-62-66.compute-1.amazonaws.com]
+
+    TASK: [Start daemon] **********************************************************
+    changed: [ec2-200-169-29-109.compute-1.amazonaws.com]
+    ok: [ec2-62-140-62-213.compute-1.amazonaws.com]
+    changed: [ec2-23-76-62-66.compute-1.amazonaws.com]
+
+    PLAY RECAP ********************************************************************
+    ec2-23-76-62-66.compute-1.amazonaws.com   : ok=5    changed=5    unreachable=0    failed=0
+    ec2-23-76-62-66.compute-1.amazonaws.com   : ok=5    changed=5    unreachable=0    failed=0
+    ec2-59-191-254-39.compute-1.amazonaws.com : ok=5    changed=0    unreachable=0    failed=0
 
 * 
 
@@ -135,12 +170,24 @@ Playbook:
     ],
     ...
 
+* 
+
 Playbook:
 
     - name: My playbook
       hosts: i-3f4e42f6
       tasks:
         ...
+
+Ad-hoc command:
+
+    $ ansible i-3f4e42f -m ping
+
+    ec2-107-33-214-218.compute-1.amazonaws.com | success >> {
+        "changed": false,
+        "ping": "pong"
+    }
+
 # Ansible comes with a executable script called ec2.py.
 # A couple of interesting things about this
 # First off, it creates groups for instance ids
@@ -343,6 +390,16 @@ Ansible is now happy:
 * 
 
 .code packer-broken.json
+
+* 
+
+    - name: Install nginx
+      hosts: localhost
+      tasks:
+        - name: add nginx package
+          apt: name=nginx
+        - name: ensure service is running
+          service: name=nginx stated
 
 * 
 
