@@ -1,4 +1,4 @@
-Hostnames suck: Managing EC2 with Ansible
+Hostnames suck, or managing EC2 with Ansible
 20 May, 2014
 
 Lorin Hochstein
@@ -226,6 +226,12 @@ Playbook:
 
 * 
 
+    Name=camp-devops
+    env=testing
+    role=queue
+
+* 
+
 .image ec2-tags.png 622 1075
 
 * 
@@ -283,6 +289,20 @@ Playbook:
       tasks:
         - ...
 
+* 
+
+Static inventory file:
+
+    [production:children]
+    tag_env_production
+
+Playbook:
+
+    - name: Do something to the production servers
+      hosts: production
+      tasks:
+        - ...
+
 Ansible doesn't like this:
 
   $ ansible-playbook deploy-web-to-production.yml
@@ -323,6 +343,10 @@ Ansible is now happy:
 * 
 
 .code packer-broken.json
+
+* 
+
+    $ packer build web-ami.json
 
 * 
 
