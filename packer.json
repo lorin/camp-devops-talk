@@ -20,5 +20,4 @@
       "type": "ansible-local",
       "playbook_file": "web.yml"
     }
-  ]
-}
+  ]}

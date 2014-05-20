@@ -179,6 +179,7 @@ Playbook:
       tasks:
         ...
 
+* 
 Ad-hoc command:
 
     $ ansible i-3f4e42f -m ping
@@ -389,9 +390,13 @@ Ansible is now happy:
 
 * 
 
+web-ami.json
+
 .code packer-broken.json
 
 * 
+
+web.yml
 
     - name: Install nginx
       hosts: localhost
@@ -431,6 +436,8 @@ Ansible is now happy:
     Verify that it is available on the PATH after connecting to the machine.
 
 * 
+
+web-ami.json
 
 .code packer.json
 
